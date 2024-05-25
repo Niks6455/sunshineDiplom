@@ -1,0 +1,33 @@
+:root{
+    --accent-color: #7A0099;
+    --dark-color: #000000 ;
+    --white-color: #FFFFFF ;
+    --pink-color: #cc8ddb;
+    --PopUp-Bg: #737171b4;
+}
+body{
+    margin: 0;
+    padding: 0;
+
+}
+*{
+    font-family: 'Oswald', sans-serif;
+}
+.header_cont{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--accent-color);
+    padding: 10px 50px;
+    box-sizing: border-box;
+    font-size: 22px;
+}
+.button{
+    font-size: 24px;
+    border: none;
+    background-color: var(--accent-color);
+}
+.button:hover{
+    color: var(--pink-color);
+    cursor: pointer;
+}
