@@ -64,7 +64,7 @@
                     <input id="fioInput">
                 </div>
                 <div class="input_cont">
-                    <input id="DateAppointInput">
+                    <input id="DateAppointInput" required readonly>
                 </div>
                 <div class="input_cont">
                     <input id="phoneInput">
@@ -73,10 +73,15 @@
                     <input id="emailInput">
                 </div>
                 <div class="input_cont">
-                    <input id="dateOfAdmissionInput">
+                    <input id="dateOfAdmissionInput" type="date">
                 </div>
-               <div class="input_cont">  
-                 <input id="statusInput">
+                <div class="input_cont">
+                    <select id="statusInput">
+                        <option value="1">В обработке</option>
+                        <option value="2">Подтвержден</option>
+                        <option value="3">Отклонен</option>
+                        <option value="4">Завершен</option>
+                    </select>
                 </div>
                
               
