@@ -155,7 +155,8 @@ submitBtn.addEventListener('click', (event) => {
       })
         .then(response => {
           if (response.status === 200) {
-           console.log("Ваша заявка принята, в ближайшее время с вами свяжется наш сотрудник!")
+           alert("Ваша заявка принята, в ближайшее время с вами свяжется наш сотрудник!")
+           document.querySelector(".PopUp").classList.remove("active");
           } 
         })
        

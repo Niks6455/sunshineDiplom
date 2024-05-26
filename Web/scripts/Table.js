@@ -87,6 +87,8 @@
         const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;  // Форматируем дату в требуемый формат "дд мм гггг"
         return formattedDate
     }
+        // Вызываем функцию для добавления данных на страницу
+        addDataToTable();
     function addListner(){
         const rows = document.querySelectorAll("#tbody tr");
         let prevSelectedRow = null;
@@ -162,18 +164,13 @@
         };
     }
     function DeleteRowAppoint(){
-        if(SelectRowData != null){
-            console.log("IdSelectRow", IdSelectRow);
-            const Data = {
-                id: IdSelectRow
-            }
-            fetch('http://localhost:3000/order/deleteOrder', {
+        if(SelectRowData != null){         
+            fetch(`http://localhost:3000/order/deleteOrder/${IdSelectRow}`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                   Authorization: `${accessToken}`,
                 },
-                body: JSON.stringify(Data),
               })
                 .then(response => {
                   if (response.status === 200) {
@@ -220,36 +217,30 @@
         closePopUp();
     }
 
-    // Вызываем функцию для добавления данных на страницу
-    addDataToTable();
+
 
     // Add this function to your JS code
     function searchTable() {
+        console.log('filter')
         let input = document.querySelector("#search__input");
         let filter = input.value.toUpperCase();
-        let rows = document.querySelectorAll('#tbody tr');
-        
+        const rows = document.querySelectorAll("#tbody tr");
         for (let i = 0; i < rows.length; i++) {
-            let td = rows[i].getElementsByTagName('td');
-            let matched = false;
-            
-            for (let j = 0; j < td.length; j++) {
-                let cell = td[j];
-                if (cell) {
-                    if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        matched = true;
-                        break;
-                    }
-                }
+          let td = rows[i].getElementsByTagName('td');
+          let matched = false;
+      
+          for (let j = 0; j < td.length; j++) {
+            let cell = td[j];
+            if (cell.textContent.toUpperCase().indexOf(filter) > -1) {
+              matched = true;
+              break;
             }
-            
-            if (matched) {
-                rows[i].style.display = '';
-            } else {
-                rows[i].style.display = 'none';
-            }
+          }
+      
+          if (matched) {
+            rows[i].style.display = '';
+          } else {
+            rows[i].style.display = 'none';
+          }
         }
-    }
-
-    // Add an event listener to your search input field
-    document.querySelector("#search__input").addEventListener('keyup', searchTable);
+      }      
