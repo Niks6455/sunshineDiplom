@@ -26,8 +26,26 @@ body{
     font-size: 24px;
     border: none;
     background-color: var(--accent-color);
+    text-decoration: none;
 }
 .button:hover{
     color: var(--pink-color);
     cursor: pointer;
+}
+.menuFunction{
+    display: flex;
+    justify-content: start;
+    padding: 0px 45px;
+    width: 100%;
+    margin-top: 15px;
+    background-color: var(--PopUp-Bg);
+}
+.menuFunction button{
+    padding: 10px;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 6px;
+    margin: 10px 5px;
+    color: #fff;
+
 }
