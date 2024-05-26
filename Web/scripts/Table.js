@@ -142,3 +142,15 @@ rows.forEach((row, index) => {
 
     // Add an event listener to your search input field
     document.querySelector("#search__input").addEventListener('keyup', searchTable);
+
+
+    //Api Запросы
+    const id = sessionStorage.getItem("userID");
+    const accessToken = sessionStorage.getItem("accessToken");
+    console.log("AdminId", id);
+    console.log('accessToken', accessToken)
+
+    
+    //вывод Имени Администратора
+    const adminNameElement = document.getElementById('AdminName');
+    adminNameElement.textContent = `${sessionStorage.getItem("userName")} ${sessionStorage.getItem("userSurname")}`;
