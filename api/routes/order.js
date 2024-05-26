@@ -29,6 +29,6 @@ router
     .post(authenticateToken, asyncRoute(checkRole([roles.ADMINISTRATOR])), asyncRoute(orderController.updateOrder));
 router
     .route('/deleteOrder/:orderId')
-    .post(authenticateToken, asyncRoute(checkRole([roles.ADMINISTRATOR])), asyncRoute(orderController.deleteOrder));
+    .delete(authenticateToken, asyncRoute(checkRole([roles.ADMINISTRATOR])), asyncRoute(orderController.deleteOrder));
 
 export default router;
