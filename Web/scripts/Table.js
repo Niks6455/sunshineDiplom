@@ -45,11 +45,7 @@
             row.appendChild(cell2);
             
             const cell3 = document.createElement('td');
-            const dateTimeString = item.createdAt;
-            const dateOnly = dateTimeString.split('T')[0];  // Разбиваем строку по символу 'T' и берем первую часть (дату)
-            const parts = dateOnly.split('-');  // Разбиваем дату по символу '-'
-            const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;  // Форматируем дату в требуемый формат "дд мм гггг"
-            cell3.textContent = formattedDate;
+            cell3.textContent = translatteDate(item.createdAt);
             row.appendChild(cell3);
             
             const cell4 = document.createElement('td');
@@ -61,7 +57,7 @@
             row.appendChild(cell5);
 
             const cell6 = document.createElement('td');
-            item.date === null ? cell6.textContent = "-" :  cell6.textContent = item.date;
+            item.date === null ? cell6.textContent = "-" :  cell6.textContent = translatteDate(item.date);
 
             row.appendChild(cell6);
 
@@ -85,21 +81,39 @@
             addListner()
         });
     }
-
+    function translatteDate(date){
+        const dateOnly = date.split('T')[0];  // Разбиваем строку по символу 'T' и берем первую часть (дату)
+        const parts = dateOnly.split('-');  // Разбиваем дату по символу '-'
+        const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;  // Форматируем дату в требуемый формат "дд мм гггг"
+        return formattedDate
+    }
     function addListner(){
-        const rows = document.querySelectorAll("tr");
+        const rows = document.querySelectorAll("#tbody tr");
         let prevSelectedRow = null;
         const mass = []
         rows.forEach((row,index)=>{
             row.addEventListener('click', () => {
                 IdSelectRow = row.children[0].textContent;
+                var st = 1;
+                if(row.children[6].textContent === "В обработке"){
+                    st = 1
+                }
+                if(row.children[6].textContent === "Подтвержден"){
+                    st = 2
+                }
+                if(row.children[6].textContent === "Отклонен"){
+                    st = 3
+                }
+                if(row.children[6].textContent === "Завершен"){
+                    st = 4
+                }
                 const item = {
                     FIO: row.children[1].textContent,
                     DateAppoint: row.children[2].textContent,
                     Phone: row.children[3].textContent,
                     Email: row.children[4].textContent,
                     dateOfAdmission: row.children[5].textContent,
-                    status: row.children[6].textContent,
+                    status: st,
                 }
                 console.log("Выбранная заявка:", IdSelectRow)
                 setPopUp(item)
@@ -137,6 +151,7 @@
         document.getElementById('statusInput').value = item['status'];
         document.getElementById('DateAppointInput').value = item['DateAppoint'];
         document.getElementById('dateOfAdmissionInput').value = item['dateOfAdmission'];
+        console.log(item['dateOfAdmission'])
         SelectRowData = {
             "FIO": item['FIO'],
             "Phone":item['Phone'],
@@ -148,7 +163,27 @@
     }
     function DeleteRowAppoint(){
         if(SelectRowData != null){
-            console.log("SelectRowData", SelectRowData);
+            console.log("IdSelectRow", IdSelectRow);
+            const Data = {
+                id: IdSelectRow
+            }
+            fetch('http://localhost:3000/order/deleteOrder', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `${accessToken}`,
+                },
+                body: JSON.stringify(Data),
+              })
+                .then(response => {
+                  if (response.status === 200) {
+                    alert("Удаление прошло успешно")
+                    window.location.reload();
+                } 
+                })
+                .catch(error => {
+                  alert('Ошибка: ' + error.message);
+                });
             SelectRowData = null;
         }else{
             alert("Сначала выберите поле!");
@@ -157,13 +192,30 @@
     // Функция для сохранения измененных данных
     function saveData() {
         const updatedData = {
-            "FIO": document.getElementById('fioInput').value,
-            "Phone": document.getElementById('phoneInput').value,
-            "Email": document.getElementById('emailInput').value,
+            // "FIO": document.getElementById('fioInput').value,
+            "PhoneNumber": document.getElementById('phoneInput').value,
+            // "Email": document.getElementById('emailInput').value,
             "status": document.getElementById('statusInput').value,
-            "DateAppoint": document.getElementById('DateAppointInput').value,
-            "dateOfAdmission": document.getElementById('dateOfAdmissionInput').value
+            // "DateAppoint": document.getElementById('DateAppointInput').value,
+            "date": document.getElementById('dateOfAdmissionInput').value
         };
+        fetch(`http://localhost:3000/order/updateOrder/${IdSelectRow}`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `${accessToken}`,
+                },
+                body: JSON.stringify(updatedData),
+              })
+                .then(response => {
+                  if (response.status === 200) {
+                    alert("Обновление прошло успешно")
+                    window.location.reload();
+                } 
+                })
+                .catch(error => {
+                  alert('Ошибка: ' + error.message);
+                });
         console.log('Обновленные данные:', updatedData);
         closePopUp();
     }

@@ -188,3 +188,7 @@ table{
     right: 10px;
     top: 10px;
 }
+#statusInput{
+    width: 224px;
+    padding: 10px;
+}
