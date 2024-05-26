@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
           sessionStorage.setItem("userName", data.name); 
           sessionStorage.setItem("userSurname", data.surname);
           if (data.role === 2){
-            window.location.href = 'http://127.0.0.1:5501/Web/Page/AdminPage.html';
+            window.location.href = './page/AdminPage.html';
           }else{
-            window.location.href = 'http://127.0.0.1:5501/Web/Page/HomePage.html';
+            window.location.href = './page/HomePage.html';
           }
         })
         .catch(error => {

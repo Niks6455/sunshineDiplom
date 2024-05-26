@@ -152,8 +152,9 @@
         document.getElementById('emailInput').value = item['Email'];
         document.getElementById('statusInput').value = item['status'];
         document.getElementById('DateAppointInput').value = item['DateAppoint'];
-        document.getElementById('dateOfAdmissionInput').value = item['dateOfAdmission'];
-        console.log(item['dateOfAdmission'])
+        const dateParts = item['dateOfAdmission'].split('.');
+        const formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+        document.getElementById('dateOfAdmissionInput').value = formattedDate;
         SelectRowData = {
             "FIO": item['FIO'],
             "Phone":item['Phone'],
@@ -166,7 +167,7 @@
     function DeleteRowAppoint(){
         if(SelectRowData != null){         
             fetch(`http://localhost:3000/order/deleteOrder/${IdSelectRow}`, {
-                method: 'POST',
+                method: 'DELETE',
                 headers: {
                   'Content-Type': 'application/json',
                   Authorization: `${accessToken}`,

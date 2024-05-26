@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
               sessionStorage.setItem("accessToken", data.accessToken);
               sessionStorage.setItem("refreshToken", data.refreshToken);
               sessionStorage.setItem("userID", data.id);
-              window.location.href = 'http://127.0.0.1:5501/Web/Page/HomePage.html';
+              window.location.href = './page/HomePage.html';
             }).catch(error => {
               alert('Ошибка при регистрации: ' + error.message);
             });          
