@@ -110,3 +110,35 @@ rows.forEach((row, index) => {
         prevSelectedRow = row;
     });
 });
+
+
+    // Add this function to your JS code
+    function searchTable() {
+        let input = document.querySelector("#search__input");
+        let filter = input.value.toUpperCase();
+        let rows = document.querySelectorAll('#tbody tr');
+        
+        for (let i = 0; i < rows.length; i++) {
+            let td = rows[i].getElementsByTagName('td');
+            let matched = false;
+            
+            for (let j = 0; j < td.length; j++) {
+                let cell = td[j];
+                if (cell) {
+                    if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        matched = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (matched) {
+                rows[i].style.display = '';
+            } else {
+                rows[i].style.display = 'none';
+            }
+        }
+    }
+
+    // Add an event listener to your search input field
+    document.querySelector("#search__input").addEventListener('keyup', searchTable);

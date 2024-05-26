@@ -38,7 +38,7 @@ header{
     width:76px;
     padding: 10px 15px;
     border-radius: 41px;
-    background: #AFBBBD;
+    background: rgb(212, 212, 212);
     color: #000000;
     text-decoration: none;
     align-items: center;
@@ -63,6 +63,14 @@ a{
     opacity: 0px;
     align-items: center;
     margin-top: 15px;
+}
+.menuFunction input{
+    padding: 9px 35px 9px 9px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    width: 150px;
+    font-size: 18px;
+
 }
 .menuFunction button{
     padding: 10px;
@@ -170,4 +178,13 @@ table{
 .HeadPopUpButton{
     display: flex;
     justify-content: end;
+}
+.search__cont{
+    position: relative;
+    margin-right: 10px;
+}
+.search__cont img{
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
