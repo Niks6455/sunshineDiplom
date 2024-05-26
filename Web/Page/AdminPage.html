@@ -13,20 +13,78 @@
 </head>
 
 <body>
-    <header>
-        
-        <div class="header_cont">
-            <div class="nameAdmin">
-                <p>Администратор: <span>Капылов Никита</span></p>
+    <div class="container">
+        <div>
+            <header>
+                <div class="header_cont">
+                    <div class="nameAdmin">
+                        <p>Капылов Никита</p>
+                    </div>
+                    <a href="./../index.html"><p class="button">Выйти</p></a>         
+                </div>
+            </header>
+            <div class="menuFunction">
+                <button onclick="showPopUp()">Редактировать запись</button>
+                <button onclick="DeleteRowAppoint()">Удалить запись</button>
             </div>
-            <a href="./../index.html"><p class="button">Выйти</p></a>         
+            <div class="table">
+                <div class="table__inner">
+                    <table id="table">
+                        <thead id="thead">
+                            <tr>
+                                <th>Номер заявки</th>
+                                <th>ФИО</th>
+                                <th>Дата заявки</th>
+                                <th>Номер телефона</th>
+                                <th>Почта</th>
+                                <th>Дата приема</th>
+                                <th>Статус заявки</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">               
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    
-    </header>
-    <div class="menuFunction">
-        <button>Редактировать запись</button>
-        <button>Удалить запись</button>
     </div>
+    <div class="popUp" style="display: none;">
+        <div class="popUp__input">
+            <div class="popUp__container">
+                <div class="HeadPopUpButton"> <button onclick="closePopUp()">X</button></div>
+                <div class="HeadPopUp">
+                    <h3>Редактирование заявки</h3>
+                   
+                </div>
+                <div class="input_cont">
+                    <input id="fioInput">
+                </div>
+                <div class="input_cont">
+                    <input id="DateAppointInput">
+                </div>
+                <div class="input_cont">
+                    <input id="phoneInput">
+                </div>
+                <div class="input_cont">
+                    <input id="emailInput">
+                </div>
+                <div class="input_cont">
+                    <input id="dateOfAdmissionInput">
+                </div>
+               <div class="input_cont">  
+                 <input id="statusInput">
+                </div>
+               
+              
+             
+                <div class="subminBtn__container">
+                    <button class="subminBtn" onclick="saveData()">Сохранить</button>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+   
 </body>
-
+    <script src="./../scripts/Table.js"></script>
 </html>
