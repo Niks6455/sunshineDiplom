@@ -1,3 +1,9 @@
+//! Важные штучки
+const id = sessionStorage.getItem("userID");
+const accessToken = sessionStorage.getItem("accessToken");
+console.log("userID", id);
+console.log('accessToken', accessToken)
+
 
 //! Слайдер
 let index = 0; 
@@ -126,15 +132,9 @@ submitBtn.addEventListener('click', (event) => {
   event.preventDefault();
 
   const phoneNumber = form.querySelector('input[name="number"]').value;
-  const email = form.querySelector('input[name="Email"]').value;
 
     //валидации формы
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\+?\d{10,14}$/;
-    if (!emailRegex.test(email)) {
-        alert('Пожалуйста, введите корректный адрес электронной почты.');
-        return;
-    }
     if (!phoneRegex.test(phoneNumber)) {
         alert('Пожалуйста, введите корректный номер телефона.');
         return; 
@@ -142,10 +142,27 @@ submitBtn.addEventListener('click', (event) => {
 
   //отправка формы
   const formDatadata = {
-    email: email,
-    phone: phoneNumber
+    phoneNumber: phoneNumber
   }
-  console.log(formDatadata)
+  console.log(JSON.stringify(formDatadata))
+  fetch('http://localhost:3000/order/createOrder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${accessToken}`,
+        },
+        body: JSON.stringify(formDatadata),
+      })
+        .then(response => {
+          if (response.status === 200) {
+           alert("Ваша заявка принята, в ближайшее время с вами свяжется наш сотрудник!")
+           document.querySelector(".PopUp").classList.remove("active");
+          } 
+        })
+       
+        .catch(error => {
+          alert('Ошибка: ' + error.message);
+        });
 });
 
 
@@ -158,3 +175,9 @@ burger_nav.addEventListener("click", () =>{
     burger.classList.contains("active") ? burger.classList.remove("active") : burger.classList.add("active")
 
 })
+
+
+
+
+
+    
