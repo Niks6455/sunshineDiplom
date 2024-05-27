@@ -190,11 +190,8 @@
     // Функция для сохранения измененных данных
     function saveData() {
         const updatedData = {
-            // "FIO": document.getElementById('fioInput').value,
             "PhoneNumber": document.getElementById('phoneInput').value,
-            // "Email": document.getElementById('emailInput').value,
             "status": document.getElementById('statusInput').value,
-            // "DateAppoint": document.getElementById('DateAppointInput').value,
             "date": document.getElementById('dateOfAdmissionInput').value
         };
         fetch(`http://localhost:3000/order/updateOrder/${IdSelectRow}`, {
